@@ -1432,3 +1432,34 @@ LogConfig: Set CVar [[r.VRS.ContrastAdaptiveShading:1]]
 [2025.11.12-04.29.27:288][984]LogStall: Shutdown...
 [2025.11.12-04.29.27:365][984]LogStall: Shutdown complete.
 [2025.11.12-04.29.29:860][984]LogSlate: Window 'IGME689 - Unreal Editor' being destroyed
+[2025.11.12-04.29.41:264][984]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 2885.580566
+[2025.11.12-04.29.41:690][984]Cmd: QUIT_EDITOR
+[2025.11.12-04.29.41:821][984]LogCore: Engine exit requested (reason: UUnrealEdEngine::CloseEditor())
+[2025.11.12-04.29.43:470][985]LogCore: Engine exit requested (reason: EngineExit() was called; note: exit was already requested)
+[2025.11.12-04.29.43:888][985]LogStaticMesh: Abandoning remaining async distance field tasks for shutdown
+[2025.11.12-04.29.43:889][985]LogStaticMesh: Abandoning remaining async card representation tasks for shutdown
+[2025.11.12-04.29.48:254][985]LogWorld: UWorld::CleanupWorld for Untitled_1, bSessionEnded=true, bCleanupResources=true
+[2025.11.12-04.29.48:647][985]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.12-04.29.48:691][985]LogWorldPartition: UWorldPartition::Uninitialize : World = /Temp/Untitled_1.Untitled_1
+[2025.11.12-04.29.51:477][985]LogStylusInput: Shutting down StylusInput subsystem.
+[2025.11.12-04.29.51:564][985]LogTedsSettings: UTedsSettingsEditorSubsystem::Deinitialize
+[2025.11.12-04.29.52:018][985]LogLevelSequenceEditor: LevelSequenceEditor subsystem deinitialized.
+[2025.11.12-04.29.52:963][985]LogRuntimeTelemetry: Recording EnginePreExit events
+[2025.11.12-04.29.53:046][985]LogStudioTelemetry: Ended StudioTelemetry Session
+[2025.11.12-04.29.53:191][985]LogAnalytics: Display: [UEEditor.Rocket.Release] AnalyticsET::EndSession
+[2025.11.12-04.29.53:817][985]LogAudio: Display: Beginning Audio Device Manager Shutdown (Module: AudioMixerXAudio2)...
+[2025.11.12-04.29.53:817][985]LogAudio: Display: Destroying 1 Remaining Audio Device(s)...
+[2025.11.12-04.29.53:835][985]LogAudio: Display: Audio Device unregistered from world 'Untitled_1'.
+[2025.11.12-04.29.54:080][985]LogAudio: Display: Shutting down audio device while 1 references to it are still alive. For more information, compile with INSTRUMENT_AUDIODEVICE_HANDLES.
+[2025.11.12-04.29.54:407][985]LogAudioMixer: Display: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1, StreamState=4
+[2025.11.12-04.29.54:624][985]LogAudioMixer: Display: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1, StreamState=2
+[2025.11.12-04.29.55:370][985]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID -1
+[2025.11.12-04.29.55:388][985]LogAudio: Display: Audio Device Manager Shutdown
+[2025.11.12-04.29.55:399][985]LogWindowsTextInputMethodSystem: Activated input method: English (United States) - (Keyboard).
+[2025.11.12-04.29.55:745][985]LogSlate: Slate User Destroyed.  User Index 0, Is Virtual User: 0
+[2025.11.12-04.29.55:902][985]LogExit: Preparing to exit.
+[2025.11.12-04.29.58:280][985]LogUObjectHash: Compacting FUObjectHashTables data took   8.01ms
+[2025.11.12-04.30.01:659][985]LogEditorDataStorage: Deinitializing
+[2025.11.12-04.30.11:562][985]LogDemo: Cleaned up 0 splitscreen connections, owner deletion: enabled
+[2025.11.12-04.30.17:833][985]LogExit: Editor shut down
+[2025.11.12-04.30.18:557][985]LogExit: Transaction tracking system shut down
