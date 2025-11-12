@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "IGME689",
+			"Path": "..\\Source\\IGME689.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "IGME689Editor",
+			"Path": "..\\Source\\IGME689Editor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

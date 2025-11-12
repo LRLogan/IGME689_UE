@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-IGME689.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:/GitHub/IGME689_UE/UnrealEngineProj/IGME689/Intermediate/Build/Win64/x64/IGME689Editor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.obj"
+"E:/GitHub/IGME689_UE/UnrealEngineProj/IGME689/Intermediate/Build/Win64/x64/UnrealEditor/Development/IGME689/IGME689.cpp.obj"
+"E:/GitHub/IGME689_UE/UnrealEngineProj/IGME689/Intermediate/Build/Win64/x64/UnrealEditor/Development/IGME689/PerModuleInline.gen.cpp.obj"
+"E:/GitHub/IGME689_UE/UnrealEngineProj/IGME689/Intermediate/Build/Win64/x64/UnrealEditor/Development/IGME689/Default.rc2.res"
+/OUT:"E:/GitHub/IGME689_UE/UnrealEngineProj/IGME689/Intermediate/Build/Win64/x64/UnrealEditor/Development/IGME689/UnrealEditor-IGME689.lib"

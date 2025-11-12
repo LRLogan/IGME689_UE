@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"E:\\GitHub\\IGME689_UE\\UnrealEngineProj\\IGME689\\Source\\IGME689\\IGME689.Build.cs",
+		"E:\\GitHub\\IGME689_UE\\UnrealEngineProj\\IGME689\\Source\\IGME689.Target.cs",
+		"E:\\GitHub\\IGME689_UE\\UnrealEngineProj\\IGME689\\Source\\IGME689Editor.Target.cs"
+	],
+	"EngineVersion": "5.6.1"
+}
