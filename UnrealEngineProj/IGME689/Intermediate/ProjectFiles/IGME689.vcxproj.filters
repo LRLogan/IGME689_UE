@@ -11,6 +11,7 @@
     <None Include="..\..\Source\IGME689Editor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -29,6 +30,12 @@
     <Filter Include="Source\IGME689">
       <UniqueIdentifier>{8B31DB32-3734-3B18-8B41-8EC9D89D6A3C}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\IGME689\FeatureLayerQuery.cpp">
+      <Filter>Source\IGME689</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\IGME689\FeatureLayerQuery.h">
+      <Filter>Source\IGME689</Filter>
+    </ClInclude>
     <None Include="..\..\Source\IGME689\IGME689.Build.cs">
       <Filter>Source\IGME689</Filter>
     </None>

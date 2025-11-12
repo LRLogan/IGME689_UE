@@ -1361,3 +1361,56 @@ LogConfig: Set CVar [[r.VRS.ContrastAdaptiveShading:1]]
 [2025.11.12-03.47.22:266][521]LogContentBrowser: Attempting asset rename: NewFolder -> C++Classes
 [2025.11.12-03.47.22:267][521]LogContentBrowser: End creating deferred item NewFolder
 [2025.11.12-03.48.17:206][163]LogSlate: Took 0.017557 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-BoldCondensed.ttf' (158K)
+[2025.11.12-03.48.38:918][214]Running E:/UE5/Versions/UE_5.6/Engine/Build/BatchFiles/Build.bat  -projectfiles -project="E:/GitHub/IGME689_UE/UnrealEngineProj/IGME689/IGME689.uproject" -game -rocket -progress
+[2025.11.12-03.48.40:147][214]Using bundled DotNet SDK version: 8.0.300 win-x64
+[2025.11.12-03.48.40:147][214]Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -projectfiles -project="E:/GitHub/IGME689_UE/UnrealEngineProj/IGME689/IGME689.uproject" -game -rocket -progress
+[2025.11.12-03.49.30:469][214]Log file: C:\Users\LRLar\AppData\Local\UnrealBuildTool\Log_GPF.txt
+[2025.11.12-03.49.31:476][214]
+[2025.11.12-03.49.31:476][214]Generating VisualStudio project files:
+[2025.11.12-03.49.31:476][214]Discovering modules, targets and source code for project...
+[2025.11.12-03.49.34:593][214]Adding projects for all targets...
+[2025.11.12-03.50.11:496][214]Adding projects for all targets took 36.91s
+[2025.11.12-03.50.11:496][214]Adding projects for all game projects took 0.02s
+[2025.11.12-03.50.20:658][214]Adding projects for all modules took 7.89s
+[2025.11.12-03.50.24:584][214]Compiling Rules Assemblies
+[2025.11.12-03.50.24:586][214]Compiling Rules Assemblies 100%
+[2025.11.12-03.50.24:586][214]Creating Build Targets
+[2025.11.12-03.50.44:520][214]Creating Build Targets 50%
+[2025.11.12-03.50.44:520][214]Creating Build Targets 100%
+[2025.11.12-03.50.44:520][214]Creating Build Targets took 19.89s
+[2025.11.12-03.50.44:520][214]Binding IntelliSense data...
+[2025.11.12-03.52.49:835][214]Binding IntelliSense data... 1%
+[2025.11.12-03.53.04:537][214]Binding IntelliSense data... 7%
+[2025.11.12-03.53.36:338][214]Binding IntelliSense data... 11%
+[2025.11.12-03.53.48:508][214]Binding IntelliSense data... 17%
+[2025.11.12-03.54.01:790][214]Binding IntelliSense data... 25%
+[2025.11.12-03.54.16:091][214]Binding IntelliSense data... 32%
+[2025.11.12-03.54.34:105][214]Binding IntelliSense data... 38%
+[2025.11.12-03.54.47:990][214]Binding IntelliSense data... 44%
+[2025.11.12-03.55.04:594][214]Binding IntelliSense data... 48%
+[2025.11.12-03.55.23:305][214]Binding IntelliSense data... 52%
+[2025.11.12-03.55.38:489][214]Binding IntelliSense data... 55%
+[2025.11.12-03.55.54:892][214]Binding IntelliSense data... 60%
+[2025.11.12-03.56.10:300][214]Binding IntelliSense data... 64%
+[2025.11.12-03.56.26:814][214]Binding IntelliSense data... 68%
+[2025.11.12-03.56.35:269][214]Binding IntelliSense data... 100%
+[2025.11.12-03.56.35:269][214]Binding IntelliSense data took 350.82s
+[2025.11.12-03.56.35:371][214]Writing project files...
+[2025.11.12-03.59.54:149][214]Writing project files... 33%
+[2025.11.12-03.59.54:855][214]Writing project files... 100%
+[2025.11.12-03.59.57:371][214]Writing project files took 202.02s
+[2025.11.12-03.59.57:371][214]
+[2025.11.12-03.59.57:371][214]Generating QueryTargets data for editor...
+[2025.11.12-03.59.57:371][214]Compiling Rules Assemblies
+[2025.11.12-03.59.57:371][214]Compiling Rules Assemblies 100%
+[2025.11.12-03.59.57:371][214]Writing Query Target Info
+[2025.11.12-03.59.58:178][214]Writing Query Target Info 100%
+[2025.11.12-03.59.58:178][214]Generating QueryTargets data for editor took 0.81s
+[2025.11.12-03.59.58:380][214]
+[2025.11.12-03.59.58:380][214]Result: Succeeded
+[2025.11.12-03.59.58:380][214]Total execution time: 669.26 seconds
+[2025.11.12-04.00.00:606][214]LogSlate: Window 'Add C++ Class' being destroyed
+[2025.11.12-04.00.00:819][214]LogLiveCoding: Display: Starting Live Coding compile.
+[2025.11.12-04.00.02:570][215]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 1106.521851
+[2025.11.12-04.00.04:906][222]LogEOSSDK: LogEOS: SDK Config Product Update Request Completed - No Change
+[2025.11.12-04.00.04:906][222]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 1108.895264, Update Interval: 309.693909
