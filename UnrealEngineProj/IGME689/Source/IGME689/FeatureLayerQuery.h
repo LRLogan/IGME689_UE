@@ -25,9 +25,15 @@ struct FProperties
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere);
-	TArray<FString> properties;
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere);
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	int32 alt;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	int32 length;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	FString location;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	FString name;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Geometry");
 	TArray<FGeometries> geometries;
 };
 

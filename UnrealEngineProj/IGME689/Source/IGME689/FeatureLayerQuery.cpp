@@ -52,14 +52,15 @@ void AFeatureLayerQuery::OnResponceReceived(FHttpRequestPtr request, FHttpRespon
 			auto coords = feature->AsObject()->GetObjectField(TEXT("geometry"))->
 			GetArrayField(TEXT("coordinates"));
 			
-			auto properties = feature->AsObject()->GetObjectField(TEXT("properties"))->
-			Values; 
+			auto name = feature->AsObject()->GetObjectField(TEXT("Properties"))->GetStringField(TEXT("Name"));
+			auto location = feature->AsObject()->GetObjectField(TEXT("Properties"))->GetStringField(TEXT("location"));
+			auto alt = feature->AsObject()->GetObjectField(TEXT("Properties"))->GetIntegerField(TEXT("altitude"));
+			auto length = feature->AsObject()->GetObjectField(TEXT("Properties"))->GetIntegerField(TEXT("length"));
 			
-			// Getting properties
-			for (auto property : properties)
-			{
-				curFeature.properties.Add(property.Value->AsString());
-			}
+			curFeature.name = name;
+			curFeature.location = location;
+			curFeature.alt = alt;
+			curFeature.length = length;
 			
 			// Getting geometries 
 			for (int i = 0; i < coords.Num(); i++)
