@@ -14,7 +14,7 @@ struct FGeometries
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere);
+	UPROPERTY(BlueprintReadWrite, EditAnywhere);
 	TArray<float> geometry;
 };
 
@@ -25,15 +25,15 @@ struct FProperties
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Properties");
 	int32 alt;
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Properties");
 	int32 length;
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Properties");
 	FString location;
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Properties");
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Properties");
 	FString name;
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Geometry");
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Geometry");
 	TArray<FGeometries> geometries;
 };
 
