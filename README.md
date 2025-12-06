@@ -4,3 +4,4 @@ Note that the ArcGIS plugin for unreal is not sent to the repo due to size limit
 The Unity repo is just called IGME689
 
 As requested this is also the home of my IGME 689 Final project even though it is in Unity
+- Unity version used is 2023.2.20f1
