@@ -119,6 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &74984840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 74984843}
+  - component: {fileID: 74984841}
+  m_Layer: 0
+  m_Name: ProjManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &74984841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74984840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c601c7983ca664ab879bb54660d379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingPannel: {fileID: 0}
+  roadBuilder: {fileID: 297873654}
+--- !u!4 &74984843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74984840}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4646.4995, y: 1984.5514, z: -2146.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &269917403
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +335,61 @@ MonoBehaviour:
     x: 1
     y: 1
     z: 1
+--- !u!1 &297873653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 297873655}
+  - component: {fileID: 297873654}
+  m_Layer: 0
+  m_Name: RoadBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &297873654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297873653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed3a5c1a1da42d46a84322a276f8abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapComponent: {fileID: 1222270771}
+  featureServiceUrl: https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Transportation_v1/FeatureServer/7/query
+  xMin: -8265194.95
+  xMax: -8211773.97
+  yMin: 4934181.47
+  yMax: 4978649.49
+  roadMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  lineWidth: 1.5
+  heightOffset: 5
+  groupByName: 0
+  lineArray: []
+--- !u!4 &297873655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297873653}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4756.708, y: 917.00903, z: -1719.8575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1222270770
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiKey: 'AAPTxy8BH1VEsoebNVZXo8HurB11dCIymp9IAFVB_I_4Lb-GOupoRD9WzHT7rYgDQuDsxymftCO4hocgYbnrhpobcE8oCFbeSiEh5OLC_CvPm6JvQ1g5ebpCaeoVT-HMWNPH815wWQRw_JiW9bdxqr847RVk9Il5rLWBKkvYyiBz2Q5XRMK20E71hoZP7z1IA00haJCl1WOULqImsNLx-lEbRrqXtgcJR5kJFN5SuFqEZ1Q.AT1_mcybQ46J '
-  basemap: https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/webmaps/arcgis/streets-relief
+  basemap: https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/webmaps/osm/dark-gray
   basemapType: 0
   basemapAuthentication:
     ConfigurationIndex: -1
@@ -539,3 +640,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1590952122}
   - {fileID: 1222270773}
+  - {fileID: 74984843}
+  - {fileID: 297873655}
