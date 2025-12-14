@@ -151,6 +151,7 @@ MonoBehaviour:
   loadingPannel: {fileID: 0}
   roadBuilder: {fileID: 297873654}
   buildingBuilder: {fileID: 297873656}
+  POIParser: {fileID: 1038554900}
   mapComponent: {fileID: 1222270771}
   waterAsset: {fileID: 379579263}
 --- !u!4 &74984843
@@ -653,6 +654,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &968367092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968367093}
+  m_Layer: 0
+  m_Name: POIParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &968367093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968367092}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1222270773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1038554899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1038554901}
+  - component: {fileID: 1038554900}
+  m_Layer: 0
+  m_Name: POIHandeler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1038554900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038554899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a6ff9069761b042a1ab8379fd280c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullUrl: https://services1.arcgis.com/8cuieNI8NbqQZQVJ/arcgis/rest/services/Emergency_Services/FeatureServer/0/query/?where=1=1&outFields=*&returnGeometry=true&f=geojson
+  POIobj: {fileID: 7052385510941296273, guid: 149b357087108584bb9af667978a0d1e, type: 3}
+  POIParent: {fileID: 968367092}
+--- !u!4 &1038554901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038554899}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7924.5063, y: 801.53906, z: 17304.027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1222270770
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,6 +881,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 269917406}
+  - {fileID: 968367093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1590952120
@@ -1047,4 +1127,5 @@ SceneRoots:
   - {fileID: 1222270773}
   - {fileID: 74984843}
   - {fileID: 297873655}
+  - {fileID: 1038554901}
   - {fileID: 379579267}

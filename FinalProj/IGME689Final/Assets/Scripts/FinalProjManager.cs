@@ -8,11 +8,18 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
+public enum POIType{
+    EMS,
+    Police,
+    Fire
+}
+
 public class FinalProjManager : MonoBehaviour
 {
     [SerializeField] private GameObject loadingPannel;
     [SerializeField] private FeatureRoadBuilder roadBuilder;
     [SerializeField] private FeatureBuildingBuilder buildingBuilder;
+    [SerializeField] private FeaturePOIParser POIParser;
     [SerializeField] private ArcGISMapComponent mapComponent;
 
     // Water settings
@@ -30,14 +37,16 @@ public class FinalProjManager : MonoBehaviour
         // Wait until the map has fully initialized
         while (!mapComponent || !mapComponent.HasSpatialReference())
             yield return null;
-
+        /*
         Debug.Log("Starting simulation");
         StartCoroutine(roadBuilder.QueryFeatureService(() =>
         {
             //lineArray = lineBuilder.lineArray;
             //AssignStartingData();
-        }/*,loadingPannel.GetComponentInChildren<TextMeshProUGUI>()*/));
+        }/*,loadingPannel.GetComponentInChildren<TextMeshProUGUI>()));
         StartCoroutine(buildingBuilder.LoadOrBuild());
+        */
+        StartCoroutine(POIParser.QueryPOIFeatures());
     }
 
     // Update is called once per frame
