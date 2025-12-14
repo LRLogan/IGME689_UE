@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadData : MonoBehaviour
+public class LineStructure : MonoBehaviour
 {
     [Range(0f, 1f)]
-    public float congestionValue; // 0 = green (free), 1 = red (jammed)
-    public string roadName;
+    public float colorValue;
+    public int id;
+    public string groupName;
+    public float groundElevation, maxHeight;
     public Dictionary<int, float> averageCount;
     public LineRenderer[] lines;
 
@@ -36,10 +38,10 @@ public class RoadData : MonoBehaviour
         {
             // Normalize traffic count (1–500) into 0–1 range
             float normalizedVal = Mathf.InverseLerp(1f, 500f, newVal);
-            congestionValue = Mathf.Clamp01(normalizedVal);
+            colorValue = Mathf.Clamp01(normalizedVal);
 
             // Map congestion value (0 = green, 1 = red)
-            Color color = Color.Lerp(Color.green, Color.red, congestionValue);
+            Color color = Color.Lerp(Color.green, Color.red, colorValue);
 
             ApplyGradient(color);
         }

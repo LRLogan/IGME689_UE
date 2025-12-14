@@ -77,7 +77,7 @@ public class FeatureRoadBuilder : MonoBehaviour
 
             //progressDisplay.text = "Traffic visualizer simulation now loading: \nFetching road data. This will take a moment." +
             //    $"\nRequesting records {resultOffset}–{resultOffset + maxRecordCount}";
-            //Debug.Log($"Requesting records {resultOffset}–{resultOffset + maxRecordCount}");
+            Debug.Log($"Requesting ROAD records {resultOffset}–{resultOffset + maxRecordCount}");
 
             // In the end this code gets the data in geoJSON format while catching exceptions
             using (UnityWebRequest request = UnityWebRequest.Get(url))
@@ -170,8 +170,8 @@ public class FeatureRoadBuilder : MonoBehaviour
                         lineArray.Add(go);
 
                         // Add RoadData and set its name
-                        RoadData data = go.AddComponent<RoadData>();
-                        data.roadName = name;
+                        LineStructure data = go.AddComponent<LineStructure>();
+                        data.groupName = name;
                     }
                     else parent = p;
                 }
