@@ -509,7 +509,7 @@ MonoBehaviour:
   yMax: 4978649.49
   roadMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   lineWidth: 1.5
-  heightOffset: 5
+  heightOffset: 50
   groupByName: 0
   lineArray: []
 --- !u!4 &297873655
@@ -541,9 +541,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapComponent: {fileID: 1222270771}
   featureServiceUrl: https://services2.arcgis.com/IsDCghZ73NgoYoz5/arcgis/rest/services/NYC_Building_Footprint/FeatureServer/0/query
-  lineMaterial: {fileID: 0}
+  lineMaterial: {fileID: 2100000, guid: f4a53bdab5d226f47bfb1053705b80c0, type: 2}
   lineWidth: 1.5
-  heightOffset: 5
+  heightOffset: 50
   cacheFileName: nyc_buildings.json
 --- !u!1 &379579263
 GameObject:

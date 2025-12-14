@@ -189,6 +189,7 @@ public class FeatureBuildingBuilder : MonoBehaviour
         {
             GameObject parent = new GameObject($"Building_{b.id}");
             parent.transform.parent = transform;
+            //Debug.Log($"Building Building from cache {b.id}");      // There are 1082694 buildings
 
             // Attach shared LineStructure used by roads/buildings
             LineStructure data = parent.AddComponent<LineStructure>();
