@@ -79,7 +79,7 @@ public class FeatureBuildingBuilder : MonoBehaviour
       
     }
 
-    public IEnumerator LoadOrBuild()
+    public IEnumerator LoadOrBuild(Action onComplete)
     {
         // If cached data exists, load locally (no API calls)
         if (File.Exists(CachePath))
@@ -87,15 +87,18 @@ public class FeatureBuildingBuilder : MonoBehaviour
             string json = File.ReadAllText(CachePath);
             BuildingCache cache = JsonConvert.DeserializeObject<BuildingCache>(json);
             BuildFromCache(cache);
+
             Debug.Log("Finished loading building data from cache");
+            onComplete?.Invoke();
             yield break;
         }
 
         // Otherwise query ArcGIS once and build cache
-        yield return QueryAndCache();
+        yield return QueryAndCache(onComplete);
     }
 
-    private IEnumerator QueryAndCache()
+
+    private IEnumerator QueryAndCache(Action onComplete)
     {
         List<BuildingRecord> records = new List<BuildingRecord>();
 
@@ -152,6 +155,8 @@ public class FeatureBuildingBuilder : MonoBehaviour
 
         BuildFromCache(cache);
         Debug.Log("Finished building building data from API");
+
+        onComplete?.Invoke();
     }
 
     private BuildingRecord ParseBuilding(JToken props, JToken geom)
@@ -199,11 +204,11 @@ public class FeatureBuildingBuilder : MonoBehaviour
             data.maxHeight = b.heightRoof;
 
             foreach (var ring in b.rings)
-                DrawPolygon(ring, parent.transform);
+                DrawPolygon(ring, parent.transform, data);
         }
     }
 
-    private void DrawPolygon(List<SerializableVec2> ring, Transform parent)
+    private void DrawPolygon(List<SerializableVec2> ring, Transform parent, LineStructure data)
     {
         if (ring.Count < 2) return;
 
@@ -219,6 +224,8 @@ public class FeatureBuildingBuilder : MonoBehaviour
 
             points[i] = mapComponent.GeographicToEngine(geo);
         }
+        // Storing the footrint
+        data.worldRings.Add(points);
 
         GameObject go = new GameObject("BuildingOutline");
         go.transform.parent = parent;

@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 74984843}
   - component: {fileID: 74984841}
+  - component: {fileID: 74984844}
   m_Layer: 0
   m_Name: ProjManager
   m_TagString: Untagged
@@ -153,6 +154,7 @@ MonoBehaviour:
   buildingBuilder: {fileID: 297873656}
   POIParser: {fileID: 1038554900}
   mapComponent: {fileID: 1222270771}
+  regionMngr: {fileID: 74984844}
   waterAsset: {fileID: 379579263}
 --- !u!4 &74984843
 Transform:
@@ -169,6 +171,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &74984844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74984840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43eb4cde1f96df24c94a9199ba35983b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingBuilder: {fileID: 297873656}
+  poiParser: {fileID: 1038554900}
+  poiParent: {fileID: 968367092}
+  regionMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &269917403
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +546,7 @@ MonoBehaviour:
   yMax: 4978649.49
   roadMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   lineWidth: 1.5
-  heightOffset: 50
+  heightOffset: 100
   groupByName: 0
   lineArray: []
 --- !u!4 &297873655
@@ -562,7 +580,7 @@ MonoBehaviour:
   featureServiceUrl: https://services2.arcgis.com/IsDCghZ73NgoYoz5/arcgis/rest/services/NYC_Building_Footprint/FeatureServer/0/query
   lineMaterial: {fileID: 2100000, guid: f4a53bdab5d226f47bfb1053705b80c0, type: 2}
   lineWidth: 1.5
-  heightOffset: 50
+  heightOffset: 100
   cacheFileName: nyc_buildings.json
 --- !u!1 &379579263
 GameObject:

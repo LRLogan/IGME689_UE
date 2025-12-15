@@ -14,19 +14,24 @@ public class POIData : MonoBehaviour
     public POIType type;
 
     // Other data
-    public int altOffset = 50;
-    [SerializeField] Material EMSMaterial, PoMaterial, FireMaterial;
+    public float altOffset = 50;
+    public static Dictionary<int, POIData> idToPOI = new Dictionary<int, POIData>();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Adding this POI to the global list
+        idToPOI[id] = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Clean way to get a POI by key
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static POIData GetPOIById(int id)
     {
-        
+        return idToPOI[id];
     }
 
     /// <summary>

@@ -8,18 +8,14 @@ public class LineStructure : MonoBehaviour
     public int id;
     public string groupName;
     public float groundElevation, maxHeight;
-    public Dictionary<int, float> averageCount;
     public LineRenderer[] lines;
+    public bool isUsable = true; // If not usable that means the structure is underwater in this simulation
+    public POIData assignedPOI = null;
+    public List<Vector3[]> worldRings = new List<Vector3[]>();
+
 
     private void Start()
     {
-        if (averageCount == null)
-        {
-            averageCount = new Dictionary<int, float>();
-            for (int i = 1; i <= 24; i++)
-                averageCount[i] = 0;
-        }
-
         lines = GetComponentsInChildren<LineRenderer>();
     }
 
@@ -73,4 +69,21 @@ public class LineStructure : MonoBehaviour
                 lr.colorGradient = gradient;
         }
     }
+
+    public Vector2 GetCentroid2D()
+    {
+        // Cached centroid calculation
+        return new Vector2(assignedPOI.gameObject.transform.position.x,
+            assignedPOI.gameObject.transform.position.z);
+    }
+
+    public Vector3[] GetWorldFootprint()
+    {
+        if (worldRings == null || worldRings.Count == 0)
+            return null;
+
+        // Return the outer ring
+        return worldRings[0];
+    }
+
 }

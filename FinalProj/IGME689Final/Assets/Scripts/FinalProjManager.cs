@@ -21,6 +21,9 @@ public class FinalProjManager : MonoBehaviour
     [SerializeField] private FeatureBuildingBuilder buildingBuilder;
     [SerializeField] private FeaturePOIParser POIParser;
     [SerializeField] private ArcGISMapComponent mapComponent;
+    [SerializeField] private ServiceRegionManager regionMngr;
+
+    private bool buildingFootprintsDone = false, POIsDone = false;
 
     // Water settings
     [SerializeField] private GameObject waterAsset;
@@ -37,16 +40,30 @@ public class FinalProjManager : MonoBehaviour
         // Wait until the map has fully initialized
         while (!mapComponent || !mapComponent.HasSpatialReference())
             yield return null;
-        /*
+        
         Debug.Log("Starting simulation");
         StartCoroutine(roadBuilder.QueryFeatureService(() =>
         {
+            Debug.Log("Roads done");
             //lineArray = lineBuilder.lineArray;
-            //AssignStartingData();
-        }/*,loadingPannel.GetComponentInChildren<TextMeshProUGUI>()));
-        StartCoroutine(buildingBuilder.LoadOrBuild());
-        */
-        StartCoroutine(POIParser.QueryPOIFeatures());
+        }/*,loadingPannel.GetComponentInChildren<TextMeshProUGUI>()*/));
+        StartCoroutine(buildingBuilder.LoadOrBuild(()=>
+        {
+            buildingFootprintsDone = true;
+            Debug.Log("Buildings done");
+            StartCoroutine(POIParser.QueryPOIFeatures(() =>
+            {
+                POIsDone = true;
+                Debug.Log("POI's done");
+            }));
+        }));
+
+        // Waiting for part 1 set up
+        while (!buildingFootprintsDone || !POIsDone)
+            yield return null;
+
+        Debug.Log("Part 2 set up");
+        regionMngr.RebuildServiceRegions(POIType.EMS); // Hard code EMS as placeholder
     }
 
     // Update is called once per frame

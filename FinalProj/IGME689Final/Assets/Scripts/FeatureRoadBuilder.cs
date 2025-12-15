@@ -134,7 +134,7 @@ public class FeatureRoadBuilder : MonoBehaviour
 
         Debug.Log($"Total features collected: {allFeatures.Count}");
         CreateRoadLines(new JArray(allFeatures));
-        onComplete.Invoke();
+        onComplete?.Invoke();
     }
 
 

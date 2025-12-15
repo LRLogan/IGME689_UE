@@ -140,8 +140,8 @@ MonoBehaviour:
     Heading: 0
     Pitch: 0
     Roll: 0
-  surfacePlacementMode: 0
-  surfacePlacementOffset: 0
+  surfacePlacementMode: 2
+  surfacePlacementOffset: 200
   version: 1
   isInitialized: 0
 --- !u!114 &2559123144555831425

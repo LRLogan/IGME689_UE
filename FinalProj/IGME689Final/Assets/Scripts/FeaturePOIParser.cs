@@ -28,13 +28,15 @@ public class FeaturePOIParser : MonoBehaviour
 
     }
 
-    public IEnumerator QueryPOIFeatures()
+    public IEnumerator QueryPOIFeatures(Action onComplete)
     {
         // Sends requests to each of the 3 desired layers
         for(int i = 0; i < 3; i++)
         {
             string url = $"{baseURL}/{i}/query/?where=1=1&outFields=*&returnGeometry=true&f=geojson";
-            Debug.Log(url);
+
+            Debug.Log($"Requesting POI records layer: {i}");
+
             using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
                 yield return request.SendWebRequest();
@@ -131,6 +133,7 @@ public class FeaturePOIParser : MonoBehaviour
                 }
             }
         } // END QUERY LOOP
-        
+
+        onComplete?.Invoke();
     }
 }
