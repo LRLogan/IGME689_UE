@@ -43,7 +43,7 @@ public class FinalProjManager : MonoBehaviour
 
         poiDropdown.gameObject.SetActive(false);
         poiDropdown.onValueChanged.AddListener(OnDropdownChanged);
-        poiDropdown.value = 0;
+        poiDropdown.value = 1;
         poiDropdown.RefreshShownValue();
     }
 
@@ -84,7 +84,7 @@ public class FinalProjManager : MonoBehaviour
             yield return null;
         
         Debug.Log("Part 2 set up");
-        polygonMgr.FirstLoadVoronoi(POIType.EMS); // Hard coded for now
+        polygonMgr.FirstLoadVoronoi(POIType.Police); // Hard coded for now
         Debug.Log("Set up complete");
         poiDropdown.gameObject.SetActive(true);
     }
@@ -111,7 +111,7 @@ public class FinalProjManager : MonoBehaviour
     /// Change the height of the water. Pass in a alt to raise / lower water
     /// </summary>
     /// <param name="newHeight"></param>
-    public void ChangeWaterAlt(float newHeight)
+    private void ChangeWaterAlt(float newHeight)
     {
         Vector3 curPos = new Vector3();
         curPos = waterAsset.transform.position;
@@ -120,5 +120,15 @@ public class FinalProjManager : MonoBehaviour
 
         // Update the current height tracker 
         curAlt = newHeight;
+    }
+
+    public void OnAdvance()
+    {
+
+    }
+
+    public void OnRetreat()
+    {
+
     }
 }
