@@ -1,4 +1,5 @@
 using Esri.ArcGISMapsSDK.Components;
+using Esri.ArcGISMapsSDK.Utils.Math;
 using Esri.GameEngine.Geometry;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,6 +13,11 @@ public class FeaturePOIParser : MonoBehaviour
 {
     private string baseURL =
         "https://services1.arcgis.com/8cuieNI8NbqQZQVJ/arcgis/rest/services/Emergency_Services/FeatureServer";
+
+    [SerializeField] private double xMin = -74.19579;
+    [SerializeField] private double xMax = -73.83134;
+    [SerializeField] private double yMin = 40.55794;
+    [SerializeField] private double yMax = 40.83483;
 
     [SerializeField] private GameObject POIobj;
     [SerializeField] private GameObject POIParent;
@@ -30,10 +36,24 @@ public class FeaturePOIParser : MonoBehaviour
 
     public IEnumerator QueryPOIFeatures(Action onComplete)
     {
+        string geometryStr =
+             $"{{\"xmin\":{xMin},\"ymin\":{yMin},\"xmax\":{xMax},\"ymax\":{yMax},\"spatialReference\":{{\"wkid\":4326}}}}";
+
+
         // Sends requests to each of the 3 desired layers
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            string url = $"{baseURL}/{i}/query/?where=1=1&outFields=*&returnGeometry=true&f=geojson";
+            string url =
+                $"{baseURL}/{i}/query?" +
+                "f=geojson" +
+                $"&geometry={UnityWebRequest.EscapeURL(geometryStr)}" +
+                "&geometryType=esriGeometryEnvelope" +
+                "&spatialRel=esriSpatialRelIntersects" +
+                "&where=1=1" +
+                "&outFields=*" +
+                "&returnGeometry=true" +
+                "&outSR=4326";
+
 
             Debug.Log($"Requesting POI records layer: {i}");
 

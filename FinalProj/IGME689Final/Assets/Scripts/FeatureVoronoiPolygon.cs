@@ -1,88 +1,72 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
-public static class FeatureVoronoiPolygon
+public class FeatureVoronoiPolygon : MonoBehaviour
 {
-    public static Mesh BuildHull(
-        List<Vector3> worldPoints,
-        Vector3 origin)
+    public List<POIData> pois;
+    public List<LineStructure> buildings;
+    public List<POIData> poiTypeEMS = new List<POIData>();
+    public List<POIData> poiTypePol = new List<POIData>();
+    public List<POIData> poiTypeFir = new List<POIData>();
+
+    /// <summary>
+    /// Special first time load to do additional set up
+    /// </summary>
+    /// <param name="type"></param>
+    public void FirstLoadVoronoi(POIType type)
     {
-        if (worldPoints.Count < 3)
-            return null;
-
-        List<Vector2> points2D = new List<Vector2>();
-
-        foreach (var p in worldPoints)
-            points2D.Add(new Vector2(p.x - origin.x, p.z - origin.z));
-
-        List<Vector2> hull2D = ComputeConvexHull(points2D);
-        if (hull2D.Count < 3)
-            return null;
-
-        return TriangulateHull(hull2D);
+        SeperatePOIs();
+        GenerateVoronoi(type);
     }
 
-    // Monotonic Chain Convex Hull
-    private static List<Vector2> ComputeConvexHull(List<Vector2> pts)
+    public void GenerateVoronoi(POIType type)
     {
-        pts.Sort((a, b) =>
-            a.x == b.x ? a.y.CompareTo(b.y) : a.x.CompareTo(b.x));
+        foreach (POIData poi in pois)
+            poi.ClearAssignment();
 
-        List<Vector2> hull = new List<Vector2>();
-
-        // Lower hull
-        foreach (var p in pts)
+        List<POIData> selectedPois = type switch
         {
-            while (hull.Count >= 2 &&
-                Cross(hull[hull.Count - 2], hull[hull.Count - 1], p) <= 0)
-                hull.RemoveAt(hull.Count - 1);
-            hull.Add(p);
-        }
+            POIType.EMS => poiTypeEMS,
+            POIType.Police => poiTypePol,
+            POIType.Fire => poiTypeFir,
+            _ => null
+        };
+        Debug.Log($"SelectedPois count: {selectedPois.Count}");
+        if (selectedPois == null || selectedPois.Count == 0)
+            return;
+        Debug.Log($"Buildings count {buildings.Count}");
+        foreach (LineStructure building in buildings)
+            building.AssignToNearestPOI(selectedPois);
 
-        // Upper hull
-        int lowerCount = hull.Count + 1;
-        for (int i = pts.Count - 1; i >= 0; i--)
-        {
-            Vector2 p = pts[i];
-            while (hull.Count >= lowerCount &&
-                Cross(hull[hull.Count - 2], hull[hull.Count - 1], p) <= 0)
-                hull.RemoveAt(hull.Count - 1);
-            hull.Add(p);
-        }
-
-        hull.RemoveAt(hull.Count - 1);
-        return hull;
+        // DRAW AFTER ASSIGNMENT
+        foreach (POIData poi in selectedPois)
+            poi.DrawPolygon();
     }
 
-    private static float Cross(Vector2 a, Vector2 b, Vector2 c)
+
+    private void SeperatePOIs()
     {
-        return (b.x - a.x) * (c.y - a.y) -
-               (b.y - a.y) * (c.x - a.x);
-    }
+        poiTypeEMS.Clear();
+        poiTypePol.Clear();
+        poiTypeFir.Clear();
 
-    private static Mesh TriangulateHull(List<Vector2> hull)
-    {
-        Mesh mesh = new Mesh();
-
-        Vector3[] verts = new Vector3[hull.Count];
-        for (int i = 0; i < hull.Count; i++)
-            verts[i] = new Vector3(hull[i].x, 0f, hull[i].y);
-
-        int[] tris = new int[(hull.Count - 2) * 3];
-        int t = 0;
-
-        for (int i = 1; i < hull.Count - 1; i++)
+        foreach (var poi in pois)
         {
-            tris[t++] = 0;
-            tris[t++] = i;
-            tris[t++] = i + 1;
+            switch (poi.type)
+            {
+                case POIType.EMS:
+                    poiTypeEMS.Add(poi);
+                    break;
+                case POIType.Police:
+                    poiTypePol.Add(poi);
+                    break;
+                case POIType.Fire:
+                    poiTypeFir.Add(poi);
+                    break;
+            }
         }
-
-        mesh.vertices = verts;
-        mesh.triangles = tris;
-        mesh.RecalculateNormals();
-        mesh.RecalculateBounds();
-
-        return mesh;
+        Debug.Log($"Counts in POI lists {poiTypeEMS.Count}, {poiTypePol.Count},, {poiTypeFir.Count}");
     }
+
 }

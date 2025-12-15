@@ -19,6 +19,46 @@ public class LineStructure : MonoBehaviour
         lines = GetComponentsInChildren<LineRenderer>();
     }
 
+    public Vector3 GetWorldCentroid()
+    {
+        Vector3[] verts = GetWorldFootprint();
+        if (verts == null || verts.Length == 0)
+            return transform.position;
+
+        Vector3 sum = Vector3.zero;
+        foreach (var v in verts)
+            sum += v;
+
+        return sum / verts.Length;
+    }
+
+
+    public void AssignToNearestPOI(List<POIData> pois)
+    {
+        if (pois == null || pois.Count == 0)
+            return;
+
+        float minDist = float.MaxValue;
+        POIData closest = null;
+
+        Vector3 buildingPos = GetWorldCentroid();
+
+        foreach (var poi in pois)
+        {
+            float d = Vector3.Distance(buildingPos, poi.transform.position);
+            if (d < minDist)
+            {
+                minDist = d;
+                closest = poi;
+            }
+        }
+
+        assignedPOI = closest;
+        closest.assignedLines.Add(this);
+        Debug.Log($"Assigned POI of {this.name} to {assignedPOI}");
+    }
+
+
     /// <summary>
     /// Updates congestionValue and applies a color gradient across all child LineRenderers.
     /// Takes into account traffic volume scaled between 1–500.

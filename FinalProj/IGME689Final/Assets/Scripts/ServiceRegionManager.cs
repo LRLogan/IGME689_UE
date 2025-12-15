@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ServiceRegionManager : MonoBehaviour
 {
+    /*
     [Header("References")]
     public FeatureBuildingBuilder buildingBuilder;
     public FeaturePOIParser poiParser;
@@ -186,5 +187,5 @@ public class ServiceRegionManager : MonoBehaviour
     }
 
 
-
+    */
 }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using System.Linq;
+
 
 public enum POIType{
     EMS,
@@ -21,7 +23,7 @@ public class FinalProjManager : MonoBehaviour
     [SerializeField] private FeatureBuildingBuilder buildingBuilder;
     [SerializeField] private FeaturePOIParser POIParser;
     [SerializeField] private ArcGISMapComponent mapComponent;
-    [SerializeField] private ServiceRegionManager regionMngr;
+    [SerializeField] private FeatureVoronoiPolygon polygonMgr;
 
     private bool buildingFootprintsDone = false, POIsDone = false, roadsDone = false;
 
@@ -51,6 +53,13 @@ public class FinalProjManager : MonoBehaviour
         StartCoroutine(buildingBuilder.LoadOrBuild(()=>
         {
             buildingFootprintsDone = true;
+
+            // POPULATE BUILDINGS HERE
+            polygonMgr.buildings = buildingBuilder
+                .GetComponentsInChildren<LineStructure>()
+                .Where(b => b.isUsable)
+                .ToList();
+
             Debug.Log("Buildings done");
             StartCoroutine(POIParser.QueryPOIFeatures(() =>
             {
@@ -63,10 +72,10 @@ public class FinalProjManager : MonoBehaviour
         // Waiting for part 1 set up
         while (!buildingFootprintsDone || !POIsDone || !roadsDone)
             yield return null;
-
-        Debug.Log("Part 2 set up");
-        StartCoroutine(regionMngr.RebuildServiceRegions(POIType.EMS)); // Hard code EMS as placeholder
         
+        Debug.Log("Part 2 set up");
+        polygonMgr.FirstLoadVoronoi(POIType.EMS); // Hard coded for now
+        Debug.Log("Set up complete");
     }
 
     // Update is called once per frame
