@@ -23,7 +23,7 @@ public class FinalProjManager : MonoBehaviour
     [SerializeField] private ArcGISMapComponent mapComponent;
     [SerializeField] private ServiceRegionManager regionMngr;
 
-    private bool buildingFootprintsDone = false, POIsDone = false;
+    private bool buildingFootprintsDone = false, POIsDone = false, roadsDone = false;
 
     // Water settings
     [SerializeField] private GameObject waterAsset;
@@ -45,6 +45,7 @@ public class FinalProjManager : MonoBehaviour
         StartCoroutine(roadBuilder.QueryFeatureService(() =>
         {
             Debug.Log("Roads done");
+            roadsDone = true;
             //lineArray = lineBuilder.lineArray;
         }/*,loadingPannel.GetComponentInChildren<TextMeshProUGUI>()*/));
         StartCoroutine(buildingBuilder.LoadOrBuild(()=>
@@ -58,12 +59,14 @@ public class FinalProjManager : MonoBehaviour
             }));
         }));
 
+        
         // Waiting for part 1 set up
-        while (!buildingFootprintsDone || !POIsDone)
+        while (!buildingFootprintsDone || !POIsDone || !roadsDone)
             yield return null;
 
         Debug.Log("Part 2 set up");
-        regionMngr.RebuildServiceRegions(POIType.EMS); // Hard code EMS as placeholder
+        StartCoroutine(regionMngr.RebuildServiceRegions(POIType.EMS)); // Hard code EMS as placeholder
+        
     }
 
     // Update is called once per frame

@@ -3,52 +3,86 @@ using UnityEngine;
 
 public static class FeatureVoronoiPolygon
 {
-    public static Mesh Build(List<LineStructure> buildings)
+    public static Mesh BuildHull(
+        List<Vector3> worldPoints,
+        Vector3 origin)
     {
-        List<CombineInstance> combines = new List<CombineInstance>();
+        if (worldPoints.Count < 3)
+            return null;
 
-        foreach (LineStructure b in buildings)
-        {
-            Vector3[] footprint = b.GetWorldFootprint();
-            if (footprint == null || footprint.Length < 3)
-                continue;
+        List<Vector2> points2D = new List<Vector2>();
 
-            Mesh footprintMesh = TriangulateConvexPolygon(footprint);
+        foreach (var p in worldPoints)
+            points2D.Add(new Vector2(p.x - origin.x, p.z - origin.z));
 
-            CombineInstance ci = new CombineInstance
-            {
-                mesh = footprintMesh,
-                transform = Matrix4x4.identity
-            };
+        List<Vector2> hull2D = ComputeConvexHull(points2D);
+        if (hull2D.Count < 3)
+            return null;
 
-            combines.Add(ci);
-        }
-
-        Mesh regionMesh = new Mesh();
-        regionMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
-        regionMesh.CombineMeshes(combines.ToArray(), true, false);
-        regionMesh.RecalculateNormals();
-        regionMesh.RecalculateBounds();
-
-        return regionMesh;
+        return TriangulateHull(hull2D);
     }
 
-    private static Mesh TriangulateConvexPolygon(Vector3[] verts)
+    // Monotonic Chain Convex Hull
+    private static List<Vector2> ComputeConvexHull(List<Vector2> pts)
     {
-        Mesh mesh = new Mesh();
-        mesh.vertices = verts;
+        pts.Sort((a, b) =>
+            a.x == b.x ? a.y.CompareTo(b.y) : a.x.CompareTo(b.x));
 
-        List<int> triangles = new List<int>();
+        List<Vector2> hull = new List<Vector2>();
 
-        // Triangle fan from vertex 0
-        for (int i = 1; i < verts.Length - 1; i++)
+        // Lower hull
+        foreach (var p in pts)
         {
-            triangles.Add(0);
-            triangles.Add(i);
-            triangles.Add(i + 1);
+            while (hull.Count >= 2 &&
+                Cross(hull[hull.Count - 2], hull[hull.Count - 1], p) <= 0)
+                hull.RemoveAt(hull.Count - 1);
+            hull.Add(p);
         }
 
-        mesh.triangles = triangles.ToArray();
+        // Upper hull
+        int lowerCount = hull.Count + 1;
+        for (int i = pts.Count - 1; i >= 0; i--)
+        {
+            Vector2 p = pts[i];
+            while (hull.Count >= lowerCount &&
+                Cross(hull[hull.Count - 2], hull[hull.Count - 1], p) <= 0)
+                hull.RemoveAt(hull.Count - 1);
+            hull.Add(p);
+        }
+
+        hull.RemoveAt(hull.Count - 1);
+        return hull;
+    }
+
+    private static float Cross(Vector2 a, Vector2 b, Vector2 c)
+    {
+        return (b.x - a.x) * (c.y - a.y) -
+               (b.y - a.y) * (c.x - a.x);
+    }
+
+    private static Mesh TriangulateHull(List<Vector2> hull)
+    {
+        Mesh mesh = new Mesh();
+
+        Vector3[] verts = new Vector3[hull.Count];
+        for (int i = 0; i < hull.Count; i++)
+            verts[i] = new Vector3(hull[i].x, 0f, hull[i].y);
+
+        int[] tris = new int[(hull.Count - 2) * 3];
+        int t = 0;
+
+        for (int i = 1; i < hull.Count - 1; i++)
+        {
+            tris[t++] = 0;
+            tris[t++] = i;
+            tris[t++] = i + 1;
+        }
+
+        mesh.vertices = verts;
+        mesh.triangles = tris;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+
         return mesh;
     }
 }

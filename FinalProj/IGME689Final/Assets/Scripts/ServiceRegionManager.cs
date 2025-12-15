@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,24 +17,40 @@ public class ServiceRegionManager : MonoBehaviour
     /// <summary>
     /// Main build pipeline to refresh Discrete Voronoi regions
     /// </summary>
-    public void RebuildServiceRegions(POIType targetType)
+    public IEnumerator RebuildServiceRegions(POIType targetType)
     {
+        ClearRegions();
+
         // 1. Collect usable buildings
         List<LineStructure> buildings = GetUsableBuildings();
+        Debug.Log("Collected buildings in RegionMgr: " + buildings.Count);
 
         // 2. Collect active POIs
         List<POIData> pois = GetActivePOIs();
-
+        Debug.Log("Collected POI'S in RegionMgr");
+        
         // 3. Assign nearest POI (by type)
         AssignBuildingsToPOIs(buildings, pois, targetType);
-
+        Debug.Log("Assigned POI'S in RegionMgr");
+        
         // Group buildings
         Dictionary<POIData, List<LineStructure>> grouped = GroupBuildingsByPOI(buildings);
-
+        Debug.Log("Grouped buildings in RegionMgr!");
+        
         // Build the mesh
         BuildRegionMeshes(grouped);
+        Debug.Log("Build the mesh in RegionMgr!");
+        yield return null;
     }
 
+    /// <summary>
+    /// Small cleanup between changes for optimization
+    /// </summary>
+    private void ClearRegions()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+            Destroy(transform.GetChild(i).gameObject);
+    }
 
     private List<LineStructure> GetUsableBuildings()
     {
@@ -86,6 +103,7 @@ public class ServiceRegionManager : MonoBehaviour
             }
 
             b.assignedPOI = closestPOI;
+            //Debug.Log($"Assigned {b.assignedPOI.locationName} a poi of {closestPOI}");
         }
     }
 
@@ -111,23 +129,45 @@ public class ServiceRegionManager : MonoBehaviour
     }
 
 
-    private void BuildRegionMeshes(Dictionary<POIData, List<LineStructure>> groupes)
+    private void BuildRegionMeshes(
+    Dictionary<POIData, List<LineStructure>> groups)
     {
-        foreach (var kvp in groupes)
+        foreach (var kvp in groups)
         {
             POIData poi = kvp.Key;
-            List<LineStructure> assignedBuildings = kvp.Value;
+            List<LineStructure> buildings = kvp.Value;
+
+            if (buildings.Count < 3)
+                continue;
+
+            List<Vector3> centroids = new List<Vector3>();
+
+            foreach (var b in buildings)
+            {
+                Vector2 c = b.GetCentroid2D();
+                centroids.Add(new Vector3(c.x, poi.transform.position.y, c.y));
+            }
+
+            Mesh mesh = FeatureVoronoiPolygon.BuildHull(
+                centroids,
+                poi.transform.position);
+
+            if (mesh == null)
+                continue;
 
             GameObject regionGO = new GameObject($"Region_{poi.id}");
-            regionGO.transform.parent = transform;
+            regionGO.transform.SetParent(transform, false);
+            regionGO.transform.position = poi.transform.position;
 
-            MeshFilter mf = regionGO.AddComponent<MeshFilter>();
-            MeshRenderer mr = regionGO.AddComponent<MeshRenderer>();
+            var mf = regionGO.AddComponent<MeshFilter>();
+            var mr = regionGO.AddComponent<MeshRenderer>();
 
-            mr.material = CreateRegionMaterial(poi);
-            mf.mesh = FeatureVoronoiPolygon.Build(assignedBuildings);
+            mf.sharedMesh = mesh;
+            mr.sharedMaterial = CreateRegionMaterial(poi);
         }
     }
+
+
 
     private Material CreateRegionMaterial(POIData poi)
     {

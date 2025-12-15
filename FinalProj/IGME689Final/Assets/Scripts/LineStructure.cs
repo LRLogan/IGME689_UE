@@ -72,10 +72,18 @@ public class LineStructure : MonoBehaviour
 
     public Vector2 GetCentroid2D()
     {
-        // Cached centroid calculation
-        return new Vector2(assignedPOI.gameObject.transform.position.x,
-            assignedPOI.gameObject.transform.position.z);
+        Vector3[] verts = GetWorldFootprint();
+        if (verts == null || verts.Length == 0)
+            return Vector2.zero;
+
+        Vector2 sum = Vector2.zero;
+
+        foreach (Vector3 v in verts)
+            sum += new Vector2(v.x, v.z);
+
+        return sum / verts.Length;
     }
+
 
     public Vector3[] GetWorldFootprint()
     {
