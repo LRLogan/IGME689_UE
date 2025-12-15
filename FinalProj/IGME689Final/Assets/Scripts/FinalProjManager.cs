@@ -4,10 +4,11 @@ using Esri.Unity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.UI;
 
 
 public enum POIType{
@@ -31,10 +32,19 @@ public class FinalProjManager : MonoBehaviour
     [SerializeField] private GameObject waterAsset;
     private float curAlt, prevAlt;  // Trackers used for both interpilation and detection optimization
 
+    // UI elements
+    [SerializeField] private TMP_Dropdown poiDropdown;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(StartSimulation());
+
+
+        poiDropdown.gameObject.SetActive(false);
+        poiDropdown.onValueChanged.AddListener(OnDropdownChanged);
+        poiDropdown.value = 0;
+        poiDropdown.RefreshShownValue();
     }
 
     private IEnumerator StartSimulation()
@@ -76,12 +86,25 @@ public class FinalProjManager : MonoBehaviour
         Debug.Log("Part 2 set up");
         polygonMgr.FirstLoadVoronoi(POIType.EMS); // Hard coded for now
         Debug.Log("Set up complete");
+        poiDropdown.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDropdownChanged(int index)
     {
-        
+        switch (index)
+        {
+            case 0:
+                polygonMgr.GenerateVoronoi(POIType.EMS);
+                break;
+
+            case 1:
+                polygonMgr.GenerateVoronoi(POIType.Police);
+                break;
+
+            case 2:
+                polygonMgr.GenerateVoronoi(POIType.Fire);
+                break;
+        }
     }
 
     /// <summary>

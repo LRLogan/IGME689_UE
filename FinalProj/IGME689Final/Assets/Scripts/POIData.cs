@@ -32,7 +32,7 @@ public class POIData : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.loop = true;
         lineRenderer.useWorldSpace = true;
-        lineRenderer.widthMultiplier = 2.0f;
+        lineRenderer.widthMultiplier = 10.0f;
 
         // Adding this POI to the global list
         idToPOI[id] = this;
