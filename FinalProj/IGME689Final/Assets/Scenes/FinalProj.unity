@@ -225,6 +225,8 @@ MonoBehaviour:
   polygonMgr: {fileID: 74984844}
   waterAsset: {fileID: 379579263}
   poiDropdown: {fileID: 298600308}
+  backBtn: {fileID: 404343511}
+  forwardBtn: {fileID: 1577570352}
 --- !u!4 &74984843
 Transform:
   m_ObjectHideFlags: 0
@@ -889,7 +891,7 @@ MonoBehaviour:
   featureServiceUrl: https://services2.arcgis.com/IsDCghZ73NgoYoz5/arcgis/rest/services/NYC_Building_Footprint/FeatureServer/0/query
   lineMaterial: {fileID: 2100000, guid: f4a53bdab5d226f47bfb1053705b80c0, type: 2}
   lineWidth: 1.5
-  heightOffset: 100
+  heightOffset: 1
   cacheFileName: nyc_buildings.json
 --- !u!1 &298600306
 GameObject:

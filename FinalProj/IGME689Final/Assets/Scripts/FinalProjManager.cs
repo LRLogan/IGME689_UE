@@ -34,6 +34,7 @@ public class FinalProjManager : MonoBehaviour
 
     // UI elements
     [SerializeField] private TMP_Dropdown poiDropdown;
+    [SerializeField] private GameObject backBtn, forwardBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -43,8 +44,13 @@ public class FinalProjManager : MonoBehaviour
 
         poiDropdown.gameObject.SetActive(false);
         poiDropdown.onValueChanged.AddListener(OnDropdownChanged);
-        poiDropdown.value = 1;
+        poiDropdown.value = 0;
         poiDropdown.RefreshShownValue();
+
+        curAlt = prevAlt = 0;
+
+        backBtn.SetActive(false);
+        forwardBtn.SetActive(false);
     }
 
     private IEnumerator StartSimulation()
@@ -84,9 +90,11 @@ public class FinalProjManager : MonoBehaviour
             yield return null;
         
         Debug.Log("Part 2 set up");
-        polygonMgr.FirstLoadVoronoi(POIType.Police); // Hard coded for now
+        polygonMgr.FirstLoadVoronoi(POIType.EMS); // Hard coded for now
         Debug.Log("Set up complete");
         poiDropdown.gameObject.SetActive(true);
+        backBtn.SetActive(true);
+        forwardBtn.SetActive(true);
     }
 
     private void OnDropdownChanged(int index)
@@ -94,15 +102,15 @@ public class FinalProjManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                polygonMgr.GenerateVoronoi(POIType.EMS);
+                polygonMgr.RebuildVoronoiAsync(POIType.EMS);
                 break;
 
             case 1:
-                polygonMgr.GenerateVoronoi(POIType.Police);
+                polygonMgr.RebuildVoronoiAsync(POIType.Police);
                 break;
 
             case 2:
-                polygonMgr.GenerateVoronoi(POIType.Fire);
+                polygonMgr.RebuildVoronoiAsync(POIType.Fire);
                 break;
         }
     }
@@ -119,16 +127,25 @@ public class FinalProjManager : MonoBehaviour
         waterAsset.transform.position = curPos;
 
         // Update the current height tracker 
+        prevAlt = curAlt;
         curAlt = newHeight;
     }
 
+    /// <summary>
+    /// Step the simulation forward
+    /// </summary>
     public void OnAdvance()
     {
-
+        ChangeWaterAlt(curAlt + 5);    // Hard coded for now
+        Debug.Log("Advanced water height to: " + curAlt);
     }
 
+    /// <summary>
+    /// Step the simulation back
+    /// </summary>
     public void OnRetreat()
     {
-
+        ChangeWaterAlt(curAlt - 5);
+        Debug.Log("Retreated water height to: " + curAlt);
     }
 }

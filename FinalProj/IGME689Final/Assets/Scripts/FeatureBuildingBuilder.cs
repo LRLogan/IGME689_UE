@@ -214,12 +214,13 @@ public class FeatureBuildingBuilder : MonoBehaviour
 
         Vector3[] points = new Vector3[ring.Count];
 
+        // Converting building footprints into usable points
         for (int i = 0; i < ring.Count; i++)
         {
             Vector2 v = ring[i].ToVector2();
 
             ArcGISPoint geo =
-                new ArcGISPoint(v.x, v.y, heightOffset, ArcGISSpatialReference.WGS84());
+                new ArcGISPoint(v.x, v.y, data.maxHeight, ArcGISSpatialReference.WGS84());
 
 
             points[i] = mapComponent.GeographicToEngine(geo);

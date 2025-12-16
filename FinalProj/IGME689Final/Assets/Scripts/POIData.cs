@@ -45,13 +45,21 @@ public class POIData : MonoBehaviour
     public void ClearAssignment()
     {
         assignedLines.Clear();
+
+        if (lineRenderer == null)
+            return;
+
+        lineRenderer.positionCount = 0;
+        lineRenderer.enabled = false;
     }
+
 
     public void DrawPolygon()
     {
         if (assignedLines.Count < 3)
             return;
 
+        lineRenderer.enabled = true;
         List<Vector2> points2D = new List<Vector2>();
 
         foreach (var line in assignedLines)
@@ -74,6 +82,10 @@ public class POIData : MonoBehaviour
                 )
             );
         }
+        Debug.Log(
+        $"[Polygon] POI {id} hull size: {lineRenderer.positionCount}"
+        );
+
     }
 
 
